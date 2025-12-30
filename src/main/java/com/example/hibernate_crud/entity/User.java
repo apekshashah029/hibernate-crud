@@ -1,5 +1,6 @@
 package com.example.hibernate_crud.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -14,7 +15,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
-
+@NamedQuery(
+        name = "User.findUsersWithAtleastOneProduct",
+        query = """
+            select distinct u
+            from User u
+            join u.products p
+        """
+)
 public class User {
 
     @Id
@@ -26,5 +34,6 @@ public class User {
     private int age;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
     private List<Product> products;
 }

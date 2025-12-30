@@ -45,4 +45,14 @@ public class UserController {
         return userService.deleteById(id);
     }
 
+    @GetMapping("/high-total-quantity")
+    public List<Object[]> findUsersWithHighTotalQuantity(){
+        return userService.findUsersWithHighTotalQuantity();
+    }
+
+    @GetMapping("/with-products")
+    public List<User> findUsersWithProducts(){
+        return userService.findUsersWithProducts();
+    }
+
 }

@@ -55,4 +55,12 @@ public class UserService {
         userRepository.delete(user);
         return "User deleted successfully";
     }
+
+    public List<Object[]> findUsersWithHighTotalQuantity(){
+        return userRepository.findUsersWithHighTotalQuantity();
+    }
+
+    public List<User> findUsersWithProducts(){
+        return userRepository.findUsersWithProducts();
+    }
 }
