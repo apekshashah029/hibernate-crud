@@ -55,4 +55,15 @@ public class UserController {
         return userService.findUsersWithProducts();
     }
 
+    @PostMapping("/rollback")
+    public String testRollback(@RequestBody User user) {
+        try {
+            userService.createUserAndRollback(user);
+        }catch (RuntimeException e){
+            System.out.println("Exception occurred need to rollback the transaction");
+        }
+
+        return "Rollback occurred";
+    }
+
 }

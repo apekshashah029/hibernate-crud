@@ -63,4 +63,16 @@ public class UserService {
     public List<User> findUsersWithProducts(){
         return userRepository.findUsersWithProducts();
     }
+
+    @Transactional
+    public void createUserAndRollback(User user){
+
+        userRepository.save(user);
+
+        // Force rollback
+        if (true) {
+            throw new RuntimeException("Forcing rollback to test @Transactional");
+        }
+    }
+
 }
